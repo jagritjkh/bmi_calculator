@@ -1,6 +1,6 @@
 # bmicalculator
 
-A new Flutter application.
+A new Flutter application with whole new Neumorphic Design
 
 ## Getting Started
 
