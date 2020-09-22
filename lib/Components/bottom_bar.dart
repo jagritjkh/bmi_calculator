@@ -19,7 +19,8 @@ class BottomBar extends StatelessWidget {
           ),
         ),
         margin: EdgeInsets.all(12.0),
-        padding: EdgeInsets.symmetric(vertical: 19.0),
+        padding: EdgeInsets.symmetric(vertical: 18.0),
+        height: 60,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0),

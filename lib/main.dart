@@ -1,5 +1,5 @@
 import 'package:bmi_calculator/Screens/input_page.dart';
-import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,9 +11,7 @@ class BMICalculator extends StatelessWidget {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: kUIColor,
-      ),
+      theme: lightTheme,
       home: InputPage(),
     );
   }

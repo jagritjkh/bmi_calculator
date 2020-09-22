@@ -33,8 +33,8 @@ class _InputPageState extends State<InputPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(12.0),
+              Padding(
+                padding: EdgeInsets.all(12.0),
                 child: Text(
                   'BMI, BMR & Ideal Weight CALCULATOR',
                   style: kFontTextStyle.copyWith(fontSize: 14.0),
@@ -81,191 +81,171 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
               ReusableCard(
-                cardChild: Padding(
-                  padding: EdgeInsets.all(6.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'HEIGHT',
-                        style: kLabelTextStyle,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('HEIGHT', style: kLabelTextStyle),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          height.toString(),
+                          style: kFontTextStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: kLabelTextStyle,
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            height.toString(),
-                            style: kFontTextStyle,
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPressed: () {
+                              setState(
+                                () {
+                                  (height == 120) ? height = 120 : height--;
+                                },
+                              );
+                            },
                           ),
-                          Text(
-                            'cm',
-                            style: kLabelTextStyle,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.minus,
-                              onPressed: () {
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: kBottomContainerColor,
+                              inactiveTrackColor: Colors.red,
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 10.0),
+                              thumbColor: kBottomContainerColor,
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 20.0),
+                              overlayColor:
+                                  kBottomContainerColor.withOpacity(0.3),
+                            ),
+                            child: Slider(
+                              value: height.toDouble(),
+                              min: 120.0,
+                              max: 220.0,
+                              onChanged: (double newValue) {
                                 setState(
                                   () {
-                                    (height == 120) ? height = 120 : height--;
+                                    height = newValue.round();
                                   },
                                 );
                               },
                             ),
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: kBottomContainerColor,
-                                inactiveTrackColor: Colors.red,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 10.0),
-                                thumbColor: kBottomContainerColor,
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 20.0),
-                                overlayColor:
-                                    kBottomContainerColor.withOpacity(0.3),
-                              ),
-                              child: Slider(
-                                value: height.toDouble(),
-                                min: 120.0,
-                                max: 220.0,
-                                onChanged: (double newValue) {
-                                  setState(
-                                    () {
-                                      height = newValue.round();
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.plus,
-                              onPressed: () {
-                                setState(() {
-                                  (height == 220) ? height = 220 : height++;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPressed: () {
+                              setState(() {
+                                (height == 220) ? height = 220 : height++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
               Row(
                 children: <Widget>[
                   Expanded(
                     child: ReusableCard(
-                      cardChild: Padding(
-                        padding: EdgeInsets.all(6.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'WEIGHT',
-                              style: kLabelTextStyle,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
-                              textBaseline: TextBaseline.alphabetic,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('WEIGHT', style: kLabelTextStyle),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                weight.toString(),
+                                style: kFontTextStyle,
+                              ),
+                              Text(
+                                'kg',
+                                style: kLabelTextStyle,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text(
-                                  weight.toString(),
-                                  style: kFontTextStyle,
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.minus,
+                                  onPressed: () {
+                                    setState(() {
+                                      weight == 20 ? weight = 20 : weight--;
+                                    });
+                                  },
                                 ),
-                                Text(
-                                  'kg',
-                                  style: kLabelTextStyle,
+                                SizedBox(
+                                  width: 12.0,
+                                ),
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.plus,
+                                  onPressed: () {
+                                    setState(() {
+                                      (weight == 400) ? weight = 400 : weight++;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  RoundIconButton(
-                                    icon: FontAwesomeIcons.minus,
-                                    onPressed: () {
-                                      setState(() {
-                                        weight == 20 ? weight = 20 : weight--;
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 12.0,
-                                  ),
-                                  RoundIconButton(
-                                    icon: FontAwesomeIcons.plus,
-                                    onPressed: () {
-                                      setState(() {
-                                        (weight == 400)
-                                            ? weight = 400
-                                            : weight++;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      cardChild: Padding(
-                        padding: EdgeInsets.all(6.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'AGE',
-                              style: kLabelTextStyle,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('AGE', style: kLabelTextStyle),
+                          Text(
+                            age.toString(),
+                            style: kFontTextStyle,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.minus,
+                                  onPressed: () {
+                                    setState(() {
+                                      age == 10 ? age = 10 : age--;
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 12.0,
+                                ),
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.plus,
+                                  onPressed: () {
+                                    setState(() {
+                                      age == 135 ? age = 135 : age++;
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
-                            Text(
-                              age.toString(),
-                              style: kFontTextStyle,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  RoundIconButton(
-                                    icon: FontAwesomeIcons.minus,
-                                    onPressed: () {
-                                      setState(() {
-                                        age == 10 ? age = 10 : age--;
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 12.0,
-                                  ),
-                                  RoundIconButton(
-                                    icon: FontAwesomeIcons.plus,
-                                    onPressed: () {
-                                      setState(() {
-                                        age == 135 ? age = 135 : age++;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ),
                   ),
