@@ -1,5 +1,5 @@
+import 'package:bmi_calculator/result.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/Components/reusable_card.dart';
 import 'package:bmi_calculator/Components/icon_content.dart';
 import 'package:bmi_calculator/constants.dart';
@@ -7,6 +7,7 @@ import 'package:bmi_calculator/Screens/results_page.dart';
 import 'package:bmi_calculator/Components/bottom_bar.dart';
 import 'package:bmi_calculator/Components/round_icon_button.dart';
 import 'package:bmi_calculator/calculator_brain.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum Gender {
   maleCard,
@@ -258,21 +259,22 @@ class _InputPageState extends State<InputPage> {
                       height: height,
                       weight: weight,
                       age: age);
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
                         return ResultsPage(
-                          finalBmi: calc.calculateBmi(),
-                          result: calc.getBmiResult(),
-                          interpretation: calc.getInterpretation(),
-                          finalBmr: selectedGender == Gender.maleCard
-                              ? calc.calculateBmrMen()
-                              : calc.calculateBmrWomen(),
-                          finalIbw: selectedGender == Gender.maleCard
-                              ? calc.calculateIbwMen()
-                              : calc.calculateIbwWomen(),
+                          Result(
+                              date: DateTime.now().toString(),
+                              bmi: calc.calculateBmi(),
+                              result: calc.getBmiResult(),
+                              bmr: selectedGender == Gender.maleCard
+                                  ? calc.calculateBmrMen()
+                                  : calc.calculateBmrWomen(),
+                              ibw: selectedGender == Gender.maleCard
+                                  ? calc.calculateIbwMen()
+                                  : calc.calculateIbwWomen()),
+                          calc.getInterpretation(),
                         );
                       },
                     ),

@@ -1,24 +1,51 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:bmi_calculator/Components/reusable_card.dart';
 import 'package:bmi_calculator/Components/bottom_bar.dart';
-
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+import '../result.dart';
 import 'history_page.dart';
 
-class ResultsPage extends StatelessWidget {
-  final String finalBmi;
-  final String result;
+class ResultsPage extends StatefulWidget {
+  final Result result;
   final String interpretation;
-  final String finalBmr;
-  final String finalIbw;
 
-  ResultsPage(
-      {@required this.finalBmi,
-      @required this.result,
-      @required this.interpretation,
-      @required this.finalBmr,
-      @required this.finalIbw});
+  ResultsPage(this.result, this.interpretation);
+
+  @override
+  _ResultsPageState createState() => _ResultsPageState();
+}
+
+class _ResultsPageState extends State<ResultsPage> {
+  Future<Database> database;
+
+  Future<void> saveResult() async {
+    database = openDatabase(
+      join(await getDatabasesPath(), 'results.db'),
+      onCreate: (db, version) {
+        return db.execute(
+            'CREATE TABLE result(date TEXT PRIMARY KEY, result TEXT, bmi TEXT, bmr TEXT, ibw TEXT)');
+      },
+      version: 1,
+    );
+    final Database db = await database;
+    await db.insert('result', widget.result.toMap());
+  }
+
+  Future<List<Result>> getResults() async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('result');
+    return List.generate(maps.length, (i) {
+      return Result.fromMap(maps[i]);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    saveResult();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +55,28 @@ class ResultsPage extends StatelessWidget {
         title: Text(' Your Result', style: kFontTextStyle),
         actions: [
           IconButton(
-            padding: EdgeInsets.only(right: 20),
-            icon: Icon(
-              Icons.history,
-              size: 28,
-              color: kBottomContainerColor,
-            ),
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HistoryPage())),
-          ),
+              padding: EdgeInsets.only(right: 20),
+              icon: Icon(
+                Icons.history,
+                size: 28,
+                color: kBottomContainerColor,
+              ),
+              onPressed: () async {
+                List<Result> results = await getResults();
+                if (results != null || results.length != 0) {
+                  print(results);
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HistoryPage(results, database)));
+                } else {
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text('No history!'),
+                  ));
+                }
+              }),
         ],
       ),
       body: Padding(
@@ -53,7 +93,7 @@ class ResultsPage extends StatelessWidget {
                       children: <Widget>[
                         SizedBox(height: 12.0),
                         Text("BMR Result"),
-                        Text(finalBmr, style: kFontTextStyle),
+                        Text(widget.result.bmr, style: kFontTextStyle),
                         SizedBox(height: 12.0),
                       ],
                     ),
@@ -66,7 +106,7 @@ class ResultsPage extends StatelessWidget {
                       children: <Widget>[
                         SizedBox(height: 12.0),
                         Text("Ideal Body Weight"),
-                        Text(finalIbw, style: kFontTextStyle),
+                        Text(widget.result.ibw, style: kFontTextStyle),
                         SizedBox(height: 12.0),
                       ],
                     ),
@@ -84,14 +124,14 @@ class ResultsPage extends StatelessWidget {
                       style: kLabelTextStyle.copyWith(fontSize: 24.0),
                     ),
                     Text(
-                      result.toUpperCase(),
-                      style: result == 'Normal'
+                      widget.result.result.toUpperCase(),
+                      style: widget.result.result == 'Normal'
                           ? kResultTextStyle
                           : kResultTextStyle.copyWith(color: Colors.red),
                     ),
-                    Text(finalBmi, style: kFontTextStyle),
+                    Text(widget.result.bmi, style: kFontTextStyle),
                     Text(
-                      interpretation,
+                      widget.interpretation,
                       textAlign: TextAlign.center,
                       style: kLabelTextStyle,
                     ),

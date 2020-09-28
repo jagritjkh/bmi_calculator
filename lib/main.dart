@@ -3,7 +3,9 @@ import 'package:bmi_calculator/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(BMICalculator());
+Future<void> main() async {
+  runApp(BMICalculator());
+}
 
 class BMICalculator extends StatelessWidget {
   @override
