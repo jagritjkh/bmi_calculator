@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/Theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class RoundIconButton extends StatefulWidget {
@@ -48,15 +48,10 @@ class _RoundIconButtonState extends State<RoundIconButton> {
             color: kBottomContainerColor,
             boxShadow: kBoxShadow,
             gradient: kLinearGradient),
-        child: RawMaterialButton(
-          child: Icon(
-            widget.icon,
-            color: kBottomContainerColor,
-          ),
-          constraints: BoxConstraints.tightFor(
-            width: 50.0,
-            height: 50.0,
-          ),
+        padding: EdgeInsets.all(10.0),
+        child: Icon(
+          widget.icon,
+          color: kBottomContainerColor,
         ),
       ),
     );

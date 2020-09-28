@@ -13,12 +13,12 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '6'
+    flutterVersionCode = '7'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '4.1.0'
+    flutterVersionName = '5.0.0'
 }
 
 apply plugin: 'com.android.application'
@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         applicationId "co.dartartau.bmicalculator"
-        minSdkVersion 18
+        minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

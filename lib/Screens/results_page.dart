@@ -1,11 +1,9 @@
+import 'package:bmi_calculator/Functions/database_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/Theme/constants.dart';
 import 'package:bmi_calculator/Components/reusable_card.dart';
 import 'package:bmi_calculator/Components/bottom_bar.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import '../result.dart';
-import 'history_page.dart';
+import '../Models/result.dart';
 
 class ResultsPage extends StatefulWidget {
   final Result result;
@@ -18,33 +16,12 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-  Future<Database> database;
-
-  Future<void> saveResult() async {
-    database = openDatabase(
-      join(await getDatabasesPath(), 'results.db'),
-      onCreate: (db, version) {
-        return db.execute(
-            'CREATE TABLE result(date TEXT PRIMARY KEY, result TEXT, bmi TEXT, bmr TEXT, ibw TEXT)');
-      },
-      version: 1,
-    );
-    final Database db = await database;
-    await db.insert('result', widget.result.toMap());
-  }
-
-  Future<List<Result>> getResults() async {
-    final Database db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('result');
-    return List.generate(maps.length, (i) {
-      return Result.fromMap(maps[i]);
-    });
-  }
+  DatabaseHelper _databaseHelper = DatabaseHelper();
 
   @override
   void initState() {
     super.initState();
-    saveResult();
+    _databaseHelper.saveResult(widget.result);
   }
 
   @override
@@ -54,29 +31,7 @@ class _ResultsPageState extends State<ResultsPage> {
         automaticallyImplyLeading: false,
         title: Text(' Your Result', style: kFontTextStyle),
         actions: [
-          IconButton(
-              padding: EdgeInsets.only(right: 20),
-              icon: Icon(
-                Icons.history,
-                size: 28,
-                color: kBottomContainerColor,
-              ),
-              onPressed: () async {
-                List<Result> results = await getResults();
-                if (results != null || results.length != 0) {
-                  print(results);
-
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              HistoryPage(results, database)));
-                } else {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('No history!'),
-                  ));
-                }
-              }),
+          HistoryButton(false),
         ],
       ),
       body: Padding(

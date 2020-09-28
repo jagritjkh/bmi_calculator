@@ -3,15 +3,16 @@ import 'package:bmi_calculator/Components/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sqflite/sqflite.dart';
-import '../constants.dart';
-import '../result.dart';
-import '../style.dart';
+import '../Theme/constants.dart';
+import '../Models/result.dart';
+import '../Theme/style.dart';
 
 class HistoryPage extends StatefulWidget {
   final List<Result> results;
   final Future<Database> database;
+  final bool fromInputPage;
 
-  HistoryPage(this.results, this.database);
+  HistoryPage(this.results, this.database, this.fromInputPage);
 
   @override
   _HistoryPageState createState() => _HistoryPageState();
@@ -160,7 +161,9 @@ class _HistoryPageState extends State<HistoryPage> {
                   Spacer(flex: 4),
                   BottomBar(
                     onTap: () {
-                      Navigator.pop(context);
+                      if (!widget.fromInputPage) {
+                        Navigator.pop(context);
+                      }
                       Navigator.pop(context);
                     },
                     text: 'Calculate Now',
