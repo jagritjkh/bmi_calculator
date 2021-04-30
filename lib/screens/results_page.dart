@@ -1,9 +1,9 @@
-import 'package:bmi_calculator/Functions/database_helper.dart';
+import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/functions/database_helper.dart';
+import 'package:bmi_calculator/models/result.dart';
+import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/Theme/constants.dart';
-import 'package:bmi_calculator/Components/reusable_card.dart';
-import 'package:bmi_calculator/Components/bottom_bar.dart';
-import '../Models/result.dart';
 
 class ResultsPage extends StatefulWidget {
   final Result result;
@@ -104,10 +104,7 @@ class _ResultsPageState extends State<ResultsPage> {
               ),
             ),
             BottomBar(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                text: 'RE-CALCULATE'),
+                onTap: () => Navigator.pop(context), text: 'RE-CALCULATE'),
           ],
         ),
       ),

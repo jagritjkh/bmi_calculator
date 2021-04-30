@@ -1,11 +1,11 @@
-import 'package:bmi_calculator/Components/bottom_bar.dart';
-import 'package:bmi_calculator/Components/reusable_card.dart';
+import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/models/result.dart';
+import 'package:bmi_calculator/theme/constants.dart';
+import 'package:bmi_calculator/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sqflite/sqflite.dart';
-import '../Theme/constants.dart';
-import '../Models/result.dart';
-import '../Theme/style.dart';
 
 class HistoryPage extends StatefulWidget {
   final List<Result> results;

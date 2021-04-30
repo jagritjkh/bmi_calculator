@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/Theme/constants.dart';
+import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatelessWidget {

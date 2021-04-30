@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:bmi_calculator/Screens/input_page.dart';
+import 'package:bmi_calculator/screens/input_page.dart';
 
 class CalculatorBrain {
   final Gender gender;

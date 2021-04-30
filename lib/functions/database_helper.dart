@@ -1,6 +1,6 @@
-import 'package:bmi_calculator/Models/result.dart';
-import 'package:bmi_calculator/Screens/history_page.dart';
-import 'package:bmi_calculator/Theme/constants.dart';
+import 'package:bmi_calculator/models/result.dart';
+import 'package:bmi_calculator/screens/history_page.dart';
+import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

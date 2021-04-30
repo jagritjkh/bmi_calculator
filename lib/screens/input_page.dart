@@ -1,13 +1,13 @@
-import 'package:bmi_calculator/Functions/database_helper.dart';
-import 'package:bmi_calculator/Models/result.dart';
+import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+import 'package:bmi_calculator/functions/calculator_brain.dart';
+import 'package:bmi_calculator/functions/database_helper.dart';
+import 'package:bmi_calculator/models/result.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/Components/reusable_card.dart';
-import 'package:bmi_calculator/Components/icon_content.dart';
-import 'package:bmi_calculator/Theme/constants.dart';
-import 'package:bmi_calculator/Screens/results_page.dart';
-import 'package:bmi_calculator/Components/bottom_bar.dart';
-import 'package:bmi_calculator/Components/round_icon_button.dart';
-import 'package:bmi_calculator/Functions/calculator_brain.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum Gender {
@@ -257,10 +257,11 @@ class _InputPageState extends State<InputPage> {
             BottomBar(
               onTap: () {
                 CalculatorBrain calc = CalculatorBrain(
-                    gender: selectedGender,
-                    height: height,
-                    weight: weight,
-                    age: age);
+                  gender: selectedGender,
+                  height: height,
+                  weight: weight,
+                  age: age,
+                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(
