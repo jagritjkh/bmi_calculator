@@ -6,7 +6,6 @@ import 'package:bmi_calculator/functions/calculator_brain.dart';
 import 'package:bmi_calculator/functions/database_helper.dart';
 import 'package:bmi_calculator/models/result.dart';
 import 'package:bmi_calculator/screens/results_page.dart';
-import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,7 +20,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender;
+  Gender? selectedGender;
   int height = 180;
   int weight = 60;
   int age = 20;
@@ -32,7 +31,7 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text(
           'BMI, BMR & Ideal Weight CALCULATOR',
-          style: kFontTextStyle.copyWith(fontSize: 14.0),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         actions: [
           HistoryButton(),
@@ -54,7 +53,9 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       border: selectedGender == Gender.maleCard
-                          ? Border.all(color: kBottomContainerColor, width: 2)
+                          ? Border.all(
+                              color: Theme.of(context).backgroundColor,
+                              width: 2)
                           : null,
                       cardChild: IconContent(
                         text: 'MALE',
@@ -72,7 +73,9 @@ class _InputPageState extends State<InputPage> {
                         );
                       },
                       border: selectedGender == Gender.femaleCard
-                          ? Border.all(color: kBottomContainerColor, width: 2)
+                          ? Border.all(
+                              color: Theme.of(context).backgroundColor,
+                              width: 2)
                           : null,
                       cardChild: IconContent(
                         text: 'FEMALE',
@@ -87,20 +90,14 @@ class _InputPageState extends State<InputPage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('HEIGHT', style: kLabelTextStyle),
+                  Text('HEIGHT'),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        height.toString(),
-                        style: kFontTextStyle,
-                      ),
-                      Text(
-                        'cm',
-                        style: kLabelTextStyle,
-                      ),
+                      Text(height.toString()),
+                      Text('cm'),
                     ],
                   ),
                   Padding(
@@ -118,30 +115,17 @@ class _InputPageState extends State<InputPage> {
                             );
                           },
                         ),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: kBottomContainerColor,
-                            inactiveTrackColor: Colors.red,
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                            thumbColor: kBottomContainerColor,
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 20.0),
-                            overlayColor:
-                                kBottomContainerColor.withOpacity(0.3),
-                          ),
-                          child: Slider(
-                            value: height.toDouble(),
-                            min: 120.0,
-                            max: 220.0,
-                            onChanged: (double newValue) {
-                              setState(
-                                () {
-                                  height = newValue.round();
-                                },
-                              );
-                            },
-                          ),
+                        Slider(
+                          value: height.toDouble(),
+                          min: 120.0,
+                          max: 220.0,
+                          onChanged: (double newValue) {
+                            setState(
+                              () {
+                                height = newValue.round();
+                              },
+                            );
+                          },
                         ),
                         RoundIconButton(
                           icon: FontAwesomeIcons.plus,
@@ -164,20 +148,14 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('WEIGHT', style: kLabelTextStyle),
+                        Text('WEIGHT'),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              weight.toString(),
-                              style: kFontTextStyle,
-                            ),
-                            Text(
-                              'kg',
-                              style: kLabelTextStyle,
-                            ),
+                            Text(weight.toString()),
+                            Text('kg'),
                           ],
                         ),
                         Padding(
@@ -216,10 +194,9 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('AGE', style: kLabelTextStyle),
+                        Text('AGE'),
                         Text(
                           age.toString(),
-                          style: kFontTextStyle,
                         ),
                         Padding(
                           padding: EdgeInsets.all(4.0),

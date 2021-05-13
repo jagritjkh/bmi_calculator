@@ -7,11 +7,11 @@ class Result {
     this.ibw,
   });
 
-  final String date;
-  final String result;
-  final String bmi;
-  final String bmr;
-  final String ibw;
+  final String? date;
+  final String? result;
+  final String? bmi;
+  final String? bmr;
+  final String? ibw;
 
   factory Result.fromMap(Map<String, dynamic> json) => Result(
         date: json["date"],

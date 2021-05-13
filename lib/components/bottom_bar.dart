@@ -1,12 +1,11 @@
-import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatelessWidget {
-  final Function onTap;
+  final VoidCallback onTap;
   final String text;
-  final double width;
+  final double? width;
 
-  BottomBar({@required this.onTap, @required this.text, this.width});
+  BottomBar({required this.onTap, required this.text, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class BottomBar extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(fontSize: 20.0, color: Colors.white),
+            style: Theme.of(context).textTheme.button,
           ),
         ),
         margin: EdgeInsets.all(12.0),
@@ -25,8 +24,21 @@ class BottomBar extends StatelessWidget {
         width: width ?? double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0),
-          boxShadow: kBoxShadow,
-          color: kBottomContainerColor,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).cardColor,
+              offset: Offset(5.0, 5.0),
+              blurRadius: 15.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: Theme.of(context).primaryColor,
+              offset: Offset(-5.0, -5.0),
+              blurRadius: 15.0,
+              spreadRadius: 1.0,
+            ),
+          ],
+          color: Theme.of(context).backgroundColor,
           // gradient: kLinearGradient,
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:bmi_calculator/components/bottom_bar.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/models/result.dart';
-import 'package:bmi_calculator/theme/constants.dart';
 import 'package:bmi_calculator/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -9,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 
 class HistoryPage extends StatefulWidget {
   final List<Result> results;
-  final Future<Database> database;
+  final Future<Database>? database;
   final bool fromInputPage;
 
   HistoryPage(this.results, this.database, this.fromInputPage);
@@ -26,7 +25,7 @@ class _HistoryPageState extends State<HistoryPage> {
         ? Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: Text(' History', style: kFontTextStyle),
+              title: Text(' History'),
               actions: [
                 IconButton(
                   icon: Icon(Icons.delete),
@@ -37,7 +36,7 @@ class _HistoryPageState extends State<HistoryPage> {
                               shape: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide.none),
-                              backgroundColor: backgroundColor,
+                              backgroundColor: lightColor,
                               title: Text('Delete history'),
                               content: Text(
                                   'Are you sure? Do you want to delete history?'),
@@ -49,7 +48,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                 ),
                                 BottomBar(
                                   onTap: () async {
-                                    Database db = await widget.database;
+                                    Database db = await widget.database!;
                                     db.delete('result');
                                     setState(() {
                                       widget.results.clear();
@@ -80,37 +79,31 @@ class _HistoryPageState extends State<HistoryPage> {
                                     EdgeInsets.symmetric(horizontal: 12.0),
                                 title: Text(
                                   'Date : ' +
-                                      widget.results[index].date
+                                      widget.results[index].date!
                                           .substring(0, 10),
-                                  style: kLabelTextStyle.copyWith(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
                                 ),
                                 subtitle: Text(
                                   'Time : ' +
-                                      widget.results[index].date
+                                      widget.results[index].date!
                                           .substring(11, 16),
-                                  style: kLabelTextStyle.copyWith(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
                                 ),
                                 trailing: Text(
-                                  widget.results[index].result,
-                                  style: kLabelTextStyle.copyWith(
-                                      color: widget.results[index].result ==
-                                              'Normal'
-                                          ? Colors.green.shade500
-                                          : Colors.red,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                                  widget.results[index].result!,
+                                  // style: kLabelTextStyle.copyWith(
+                                  //     color: widget.results[index].result ==
+                                  //             'Normal'
+                                  //         ? Colors.green.shade500
+                                  //         : Colors.red,
+                                  //     fontSize: 20,
+                                  //     fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              buildRow('BMI', 'BMR', 'IBW', kLabelTextStyle),
+                              buildRow('BMI', 'BMR', 'IBW', TextStyle()),
                               buildRow(
-                                  widget.results[index].bmi,
-                                  widget.results[index].bmr,
-                                  widget.results[index].ibw,
-                                  kFontTextStyle.copyWith(fontSize: 28)),
+                                  widget.results[index].bmi!,
+                                  widget.results[index].bmr!,
+                                  widget.results[index].ibw!,
+                                  TextStyle(fontSize: 28)),
                             ],
                           ),
                         )),
@@ -123,10 +116,10 @@ class _HistoryPageState extends State<HistoryPage> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                          backgroundColor.withOpacity(0.0),
-                          backgroundColor.withOpacity(0.5),
-                          backgroundColor.withOpacity(0.75),
-                          backgroundColor,
+                          lightColor.withOpacity(0.0),
+                          lightColor.withOpacity(0.5),
+                          lightColor.withOpacity(0.75),
+                          lightColor,
                         ],
                             stops: [
                           0.02,
@@ -153,11 +146,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   Lottie.asset('assets/no_history.json',
                       width: MediaQuery.of(context).size.width / 2),
                   SizedBox(height: 20.0),
-                  Text(
-                    'No history!',
-                    style:
-                        kFontTextStyle /*.copyWith(color: Colors.grey.shade600)*/,
-                  ),
+                  Text('No history!'),
                   Spacer(flex: 4),
                   BottomBar(
                     onTap: () {

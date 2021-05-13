@@ -2,7 +2,6 @@ import 'package:bmi_calculator/components/bottom_bar.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/functions/database_helper.dart';
 import 'package:bmi_calculator/models/result.dart';
-import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class ResultsPage extends StatefulWidget {
@@ -29,7 +28,7 @@ class _ResultsPageState extends State<ResultsPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(' Your Result', style: kFontTextStyle),
+        title: Text(' Your Result'),
         actions: [
           HistoryButton(false),
         ],
@@ -48,7 +47,7 @@ class _ResultsPageState extends State<ResultsPage> {
                       children: <Widget>[
                         SizedBox(height: 12.0),
                         Text("BMR Result"),
-                        Text(widget.result.bmr, style: kFontTextStyle),
+                        Text(widget.result.bmr!),
                         SizedBox(height: 12.0),
                       ],
                     ),
@@ -61,7 +60,7 @@ class _ResultsPageState extends State<ResultsPage> {
                       children: <Widget>[
                         SizedBox(height: 12.0),
                         Text("Ideal Body Weight"),
-                        Text(widget.result.ibw, style: kFontTextStyle),
+                        Text(widget.result.ibw!),
                         SizedBox(height: 12.0),
                       ],
                     ),
@@ -76,19 +75,17 @@ class _ResultsPageState extends State<ResultsPage> {
                   children: <Widget>[
                     Text(
                       "BMI Result",
-                      style: kLabelTextStyle.copyWith(fontSize: 24.0),
                     ),
                     Text(
-                      widget.result.result.toUpperCase(),
-                      style: widget.result.result == 'Normal'
-                          ? kResultTextStyle
-                          : kResultTextStyle.copyWith(color: Colors.red),
+                      widget.result.result!.toUpperCase(),
+                      // style: widget.result.result == 'Normal'
+                      //     ? kResultTextStyle
+                      //     : kResultTextStyle.copyWith(color: Colors.red),
                     ),
-                    Text(widget.result.bmi, style: kFontTextStyle),
+                    Text(widget.result.bmi!),
                     Text(
                       widget.interpretation,
                       textAlign: TextAlign.center,
-                      style: kLabelTextStyle,
                     ),
                   ],
                 ),
@@ -100,7 +97,6 @@ class _ResultsPageState extends State<ResultsPage> {
                 'Normal: between 18 and 25\n'
                 'Overweight: more than 25',
                 textAlign: TextAlign.center,
-                style: kLabelTextStyle.copyWith(height: 2),
               ),
             ),
             BottomBar(

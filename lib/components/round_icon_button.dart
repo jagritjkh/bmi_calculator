@@ -1,9 +1,9 @@
-import 'package:bmi_calculator/theme/constants.dart';
+import 'package:bmi_calculator/components/custom_box_decoration.dart';
 import 'package:flutter/material.dart';
 
 class RoundIconButton extends StatefulWidget {
-  final IconData icon;
-  final Function onPressed;
+  final IconData? icon;
+  final Function? onPressed;
 
   RoundIconButton({this.icon, this.onPressed});
 
@@ -23,7 +23,7 @@ class _RoundIconButtonState extends State<RoundIconButton> {
 
     while (_buttonPressed) {
       setState(() {
-        widget.onPressed();
+        widget.onPressed!();
       });
 
       await Future.delayed(Duration(milliseconds: 150));
@@ -43,16 +43,9 @@ class _RoundIconButtonState extends State<RoundIconButton> {
         _buttonPressed = false;
       },
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-            color: kBottomContainerColor,
-            boxShadow: kBoxShadow,
-            gradient: kLinearGradient),
+        decoration: CustomDecoration.decoration(Theme.of(context), radius: 30),
         padding: EdgeInsets.all(10.0),
-        child: Icon(
-          widget.icon,
-          color: kBottomContainerColor,
-        ),
+        child: Icon(widget.icon, color: Theme.of(context).backgroundColor),
       ),
     );
   }

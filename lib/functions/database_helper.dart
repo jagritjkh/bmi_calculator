@@ -1,12 +1,11 @@
 import 'package:bmi_calculator/models/result.dart';
 import 'package:bmi_calculator/screens/history_page.dart';
-import 'package:bmi_calculator/theme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  Future<Database> database;
+  Future<Database>? database;
 
   DatabaseHelper() {
     init();
@@ -25,12 +24,12 @@ class DatabaseHelper {
 
   Future<void> saveResult(Result result) async {
     await init();
-    final Database db = await database;
+    final Database db = await database!;
     await db.insert('result', result.toMap());
   }
 
   Future<List<Result>> getResults() async {
-    final Database db = await database;
+    final Database db = await database!;
     final List<Map<String, dynamic>> maps = await db.query('result');
     return List.generate(maps.length, (i) {
       return Result.fromMap(maps[i]);
@@ -52,21 +51,15 @@ class HistoryButton extends StatelessWidget {
         icon: Icon(
           Icons.history,
           size: 28,
-          color: kBottomContainerColor,
+          color: Theme.of(context).backgroundColor,
         ),
         onPressed: () async {
           List<Result> results = await _databaseHelper.getResults();
-          if (results != null || results.length != 0) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HistoryPage(
-                        results, _databaseHelper.database, fromInputPage)));
-          } else {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('No history!'),
-            ));
-          }
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HistoryPage(
+                      results, _databaseHelper.database, fromInputPage)));
         });
   }
 }
