@@ -30,6 +30,7 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var s = S.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -59,7 +60,7 @@ class _InputPageState extends State<InputPage> {
                           ? Border.all(color: theme.backgroundColor, width: 2)
                           : null,
                       cardChild: IconContent(
-                        text: S.of(context).male,
+                        text: s.male,
                         icon: FontAwesomeIcons.male,
                       ),
                     ),
@@ -75,7 +76,7 @@ class _InputPageState extends State<InputPage> {
                           ? Border.all(color: theme.backgroundColor, width: 2)
                           : null,
                       cardChild: IconContent(
-                        text: S.of(context).female,
+                        text: s.female,
                         icon: FontAwesomeIcons.female,
                       ),
                     ),
@@ -88,7 +89,7 @@ class _InputPageState extends State<InputPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    S.of(context).height,
+                    s.height,
                     style: theme.textTheme.bodyText1,
                   ),
                   Text(height.toString() + ' cm'),
@@ -136,8 +137,7 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(S.of(context).weight,
-                            style: theme.textTheme.bodyText1),
+                        Text(s.weight, style: theme.textTheme.bodyText1),
                         Text(weight.toString() + ' kg'),
                         Padding(
                           padding: EdgeInsets.all(4.0),
@@ -173,8 +173,7 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(S.of(context).age,
-                            style: theme.textTheme.bodyText1),
+                        Text(s.age, style: theme.textTheme.bodyText1),
                         Text(age.toString()),
                         Padding(
                           padding: EdgeInsets.all(4.0),
@@ -236,7 +235,7 @@ class _InputPageState extends State<InputPage> {
                   ),
                 );
               },
-              text: S.of(context).calculate,
+              text: s.calculate,
             )
           ],
         ),

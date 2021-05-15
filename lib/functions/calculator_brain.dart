@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:bmi_calculator/screens/input_page.dart';
+import 'package:bmi_calculator/generated/l10n.dart';
 
 class CalculatorBrain {
   final Gender? gender;
@@ -47,21 +48,19 @@ class CalculatorBrain {
 
   String getBmiResult() {
     if (_bmi >= 25)
-      return 'Overweight';
+      return S.current.overweight;
     else if (_bmi > 18)
-      return 'Normal';
+      return S.current.normal;
     else
-      return 'Underweight';
+      return S.current.underweight;
   }
 
   String getInterpretation() {
     if (_bmi >= 25)
-      return 'Your body weight is higher than normal.' +
-          '\n' +
-          'Exercise more!';
+      return S.current.higherWeight + '\n' + S.current.exerciseMore;
     else if (_bmi > 18)
-      return 'You have a normal body weight.' + '\n' + 'Great going!';
+      return S.current.normalWeight + '\n' + S.current.greatGoing;
     else
-      return 'You are underweight.' + '\n' + 'Have some more food!';
+      return S.current.youAreUnderweight + '\n' + S.current.moreFood;
   }
 }

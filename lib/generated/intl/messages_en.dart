@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "height": MessageLookupByLibrary.simpleMessage("Height"),
         "higherWeight": MessageLookupByLibrary.simpleMessage(
             "Your body weight is higher than normal."),
+        "history": MessageLookupByLibrary.simpleMessage("History"),
         "idealBody": MessageLookupByLibrary.simpleMessage("Ideal Body Weight"),
         "lessThan18": MessageLookupByLibrary.simpleMessage("less than 18"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),

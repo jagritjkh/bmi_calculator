@@ -5,6 +5,7 @@ import 'package:bmi_calculator/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:bmi_calculator/generated/l10n.dart';
 
 class HistoryPage extends StatefulWidget {
   final List<Result> results;
@@ -20,12 +21,14 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.results);
+    var theme = Theme.of(context);
     return widget.results.length != 0
         ? Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: Text(' History'),
+              titleSpacing: 20,
+              title:
+                  Text(S.of(context).history, style: theme.textTheme.headline4),
               actions: [
                 IconButton(
                   icon: Icon(Icons.delete),

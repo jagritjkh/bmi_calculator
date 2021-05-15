@@ -20,5 +20,6 @@
   "lessThan18": "less than 18",
   "between18And25": "between 18 and 25",
   "moreThan25": "more than 25",
-  "reCalculate": "RE-CALCULATE"
+  "reCalculate": "RE-CALCULATE",
+  "history": "History"
 }
