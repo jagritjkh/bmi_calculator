@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   font_awesome_flutter: ^9.0.0
   sqflite: ^2.0.0+3
@@ -19,8 +21,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  intl: ^0.17.0
+
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
+
+
+flutter_intl:
+  enabled: true
+  class_name: S
+  main_locale: en
+

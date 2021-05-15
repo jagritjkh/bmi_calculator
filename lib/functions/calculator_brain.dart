@@ -21,8 +21,8 @@ class CalculatorBrain {
   int? _bmrWomen;
 
   String calculateBmrMen() {
-    _bmrMen =
-        (66.47 + (13.75 * weight!) + (5.003 * height!) - (6.755 * age!)).toInt();
+    _bmrMen = (66.47 + (13.75 * weight!) + (5.003 * height!) - (6.755 * age!))
+        .toInt();
     return _bmrMen.toString();
   }
 
@@ -56,10 +56,12 @@ class CalculatorBrain {
 
   String getInterpretation() {
     if (_bmi >= 25)
-      return 'Your body weight is higher than normal,\nexercise more!';
+      return 'Your body weight is higher than normal.' +
+          '\n' +
+          'Exercise more!';
     else if (_bmi > 18)
-      return 'You have a normal body weight,\ngreat going!';
+      return 'You have a normal body weight.' + '\n' + 'Great going!';
     else
-      return 'Your are underweight,\nhave some more food!';
+      return 'You are underweight.' + '\n' + 'Have some more food!';
   }
 }

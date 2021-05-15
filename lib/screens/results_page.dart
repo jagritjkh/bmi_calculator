@@ -25,13 +25,13 @@ class _ResultsPageState extends State<ResultsPage> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(' Your Result'),
-        actions: [
-          HistoryButton(false),
-        ],
+        titleSpacing: 20,
+        title: Text('Your Result', style: theme.textTheme.headline4),
+        actions: [HistoryButton(false)],
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -46,8 +46,10 @@ class _ResultsPageState extends State<ResultsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         SizedBox(height: 12.0),
-                        Text("BMR Result"),
-                        Text(widget.result.bmr!),
+                        Text("BMR Result", style: theme.textTheme.bodyText1),
+                        Text(widget.result.bmr!,
+                            style: theme.textTheme.bodyText2!
+                                .copyWith(fontSize: 16)),
                         SizedBox(height: 12.0),
                       ],
                     ),
@@ -59,8 +61,13 @@ class _ResultsPageState extends State<ResultsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         SizedBox(height: 12.0),
-                        Text("Ideal Body Weight"),
-                        Text(widget.result.ibw!),
+                        Text("Ideal Body Weight",
+                            style: theme.textTheme.bodyText1),
+                        Text(
+                          widget.result.ibw!,
+                          style:
+                              theme.textTheme.bodyText2!.copyWith(fontSize: 16),
+                        ),
                         SizedBox(height: 12.0),
                       ],
                     ),
@@ -73,14 +80,14 @@ class _ResultsPageState extends State<ResultsPage> {
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(
-                      "BMI Result",
-                    ),
+                    Text("BMI Result", style: theme.textTheme.headline5),
                     Text(
                       widget.result.result!.toUpperCase(),
-                      // style: widget.result.result == 'Normal'
-                      //     ? kResultTextStyle
-                      //     : kResultTextStyle.copyWith(color: Colors.red),
+                      style: widget.result.result == 'Normal'
+                          ? theme.textTheme.headline6!
+                              .copyWith(color: Colors.green)
+                          : theme.textTheme.bodyText1!
+                              .copyWith(color: Colors.red),
                     ),
                     Text(widget.result.bmi!),
                     Text(
@@ -93,9 +100,11 @@ class _ResultsPageState extends State<ResultsPage> {
             ),
             ReusableCard(
               cardChild: Text(
-                'Underweight: less than 18\n'
-                'Normal: between 18 and 25\n'
-                'Overweight: more than 25',
+                'Underweight: less than 18' +
+                    '\n' +
+                    'Normal: between 18 and 25' +
+                    '\n' +
+                    'Overweight: more than 25',
                 textAlign: TextAlign.center,
               ),
             ),

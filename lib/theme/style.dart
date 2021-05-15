@@ -31,9 +31,12 @@ class AppTheme {
       button: TextStyle(color: lightColor, fontSize: 20),
       bodyText1: TextStyle(
         color: darkColor,
-        fontSize: 14,
         fontWeight: FontWeight.bold,
+        fontSize: 16,
       ),
+      bodyText2: TextStyle(color: darkColor),
+      headline4: TextStyle(color: darkColor, fontWeight: FontWeight.bold),
+      headline5: TextStyle(color: darkColor, fontWeight: FontWeight.bold),
     ),
 
     //slider theme
@@ -62,6 +65,14 @@ class AppTheme {
     //text theme
     textTheme: TextTheme(
       button: TextStyle(color: darkColor, fontSize: 20),
+      bodyText1: TextStyle(
+        color: lightColor,
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+      bodyText2: TextStyle(color: lightColor),
+      headline4: TextStyle(color: lightColor, fontWeight: FontWeight.bold),
+      headline5: TextStyle(color: lightColor, fontWeight: FontWeight.bold),
     ),
 
     //slider theme

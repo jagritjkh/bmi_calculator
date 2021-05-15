@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class IconContent extends StatelessWidget {
-  final String? text;
+  final String text;
   final IconData? icon;
 
-  IconContent({this.text, this.icon});
+  IconContent({required this.text, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,10 @@ class IconContent extends StatelessWidget {
           padding: EdgeInsets.all(4.0),
           margin: EdgeInsets.only(bottom: 8.0),
           alignment: Alignment.center,
-          child: Text(text!),
+          child: Text(
+            text.toUpperCase(),
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
         ),
       ],
     );
