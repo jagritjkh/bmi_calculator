@@ -1,7 +1,7 @@
 import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/custom_box_decoration.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/models/result.dart';
-import 'package:bmi_calculator/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sqflite/sqflite.dart';
@@ -124,22 +124,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     height: 100.0,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                          lightColor.withOpacity(0.0),
-                          lightColor.withOpacity(0.5),
-                          lightColor.withOpacity(0.75),
-                          lightColor,
-                        ],
-                            stops: [
-                          0.02,
-                          0.075,
-                          0.1,
-                          0.15
-                        ])),
+                    decoration: CustomDecoration.decoration(theme),
                   ),
                 ),
                 Align(

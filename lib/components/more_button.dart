@@ -53,6 +53,7 @@ class MoreButton extends StatelessWidget {
                             style: theme.textTheme.bodyText1,
                           ),
                           onTap: () {
+                            Navigator.pop(context);
                             Share.share(
                               '${s.heyIFound} BMI, BMR & Ideal Body Weight ${s.on}' +
                                   ' Play Store!' +

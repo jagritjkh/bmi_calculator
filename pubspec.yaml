@@ -18,6 +18,8 @@ dependencies:
   lottie: ^1.0.1
   animation_wrappers: ^0.0.4
   share: ^2.0.1
+  animated_theme_switcher: ^2.0.1
+  shared_preferences: ^2.0.5
 
 
 dev_dependencies:
@@ -33,7 +35,7 @@ flutter:
 
 
 flutter_intl:
-  enabled: true
+  enabled: false
   class_name: S
   main_locale: en
 

@@ -56,6 +56,7 @@ class HistoryTile extends StatelessWidget {
           title: Text(S.of(context).history, style: theme.textTheme.bodyText1),
           onTap: () async {
             List<Result> results = await _databaseHelper.getResults();
+            Navigator.pop(context);
             Navigator.push(
                 context,
                 MaterialPageRoute(
