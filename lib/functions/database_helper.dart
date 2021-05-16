@@ -1,8 +1,10 @@
+import 'package:bmi_calculator/components/custom_box_decoration.dart';
 import 'package:bmi_calculator/models/result.dart';
 import 'package:bmi_calculator/screens/history_page.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:bmi_calculator/generated/l10n.dart';
 
 class DatabaseHelper {
   Future<Database>? database;
@@ -37,29 +39,29 @@ class DatabaseHelper {
   }
 }
 
-class HistoryButton extends StatelessWidget {
+class HistoryTile extends StatelessWidget {
   final bool fromInputPage;
 
-  HistoryButton([this.fromInputPage = true]);
+  HistoryTile([this.fromInputPage = true]);
 
   final DatabaseHelper _databaseHelper = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-        padding: EdgeInsets.only(right: 20),
-        icon: Icon(
-          Icons.history,
-          size: 28,
-          color: Theme.of(context).backgroundColor,
-        ),
-        onPressed: () async {
-          List<Result> results = await _databaseHelper.getResults();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HistoryPage(
-                      results, _databaseHelper.database, fromInputPage)));
-        });
+    var theme = Theme.of(context);
+    return Container(
+      decoration: CustomDecoration.decoration(theme),
+      child: ListTile(
+          leading: Icon(Icons.history, color: theme.backgroundColor),
+          title: Text(S.of(context).history, style: theme.textTheme.bodyText1),
+          onTap: () async {
+            List<Result> results = await _databaseHelper.getResults();
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HistoryPage(
+                        results, _databaseHelper.database, fromInputPage)));
+          }),
+    );
   }
 }

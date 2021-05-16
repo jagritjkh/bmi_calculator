@@ -1,15 +1,19 @@
 import 'package:bmi_calculator/app_config/app_config.dart';
 import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/custom_box_decoration.dart';
 import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/components/more_button.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/functions/calculator_brain.dart';
 import 'package:bmi_calculator/functions/database_helper.dart';
 import 'package:bmi_calculator/models/result.dart';
 import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/generated/l10n.dart';
+import 'package:share/share.dart';
 
 enum Gender {
   maleCard,
@@ -37,9 +41,6 @@ class _InputPageState extends State<InputPage> {
           AppConfig.appName,
           style: theme.textTheme.bodyText1,
         ),
-        actions: [
-          HistoryButton(),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
@@ -206,36 +207,45 @@ class _InputPageState extends State<InputPage> {
                 ),
               ],
             ),
-            BottomBar(
-              onTap: () {
-                CalculatorBrain calc = CalculatorBrain(
-                  gender: selectedGender,
-                  height: height,
-                  weight: weight,
-                  age: age,
-                );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ResultsPage(
-                        Result(
-                            date: DateTime.now().toString(),
-                            bmi: calc.calculateBmi(),
-                            result: calc.getBmiResult(),
-                            bmr: selectedGender == Gender.maleCard
-                                ? calc.calculateBmrMen()
-                                : calc.calculateBmrWomen(),
-                            ibw: selectedGender == Gender.maleCard
-                                ? calc.calculateIbwMen()
-                                : calc.calculateIbwWomen()),
-                        calc.getInterpretation(),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: BottomBar(
+                    onTap: () {
+                      CalculatorBrain calc = CalculatorBrain(
+                        gender: selectedGender,
+                        height: height,
+                        weight: weight,
+                        age: age,
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ResultsPage(
+                              Result(
+                                  date: DateTime.now().toString(),
+                                  bmi: calc.calculateBmi(),
+                                  result: calc.getBmiResult(),
+                                  bmr: selectedGender == Gender.maleCard
+                                      ? calc.calculateBmrMen()
+                                      : calc.calculateBmrWomen(),
+                                  ibw: selectedGender == Gender.maleCard
+                                      ? calc.calculateIbwMen()
+                                      : calc.calculateIbwWomen()),
+                              calc.getInterpretation(),
+                            );
+                          },
+                        ),
                       );
                     },
+                    text: s.calculate,
                   ),
-                );
-              },
-              text: s.calculate,
+                ),
+                MoreButton(),
+                SizedBox(width: 16),
+              ],
             )
           ],
         ),

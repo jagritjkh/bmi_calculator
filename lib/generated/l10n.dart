@@ -369,6 +369,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Hey, I found this great app to measure`
+  String get heyIFound {
+    return Intl.message(
+      'Hey, I found this great app to measure',
+      name: 'heyIFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `on`
+  String get on {
+    return Intl.message(
+      'on',
+      name: 'on',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

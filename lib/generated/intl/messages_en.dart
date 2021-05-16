@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "greatGoing": MessageLookupByLibrary.simpleMessage("Great going!"),
         "height": MessageLookupByLibrary.simpleMessage("Height"),
+        "heyIFound": MessageLookupByLibrary.simpleMessage(
+            "Hey, I found this great app to measure"),
         "higherWeight": MessageLookupByLibrary.simpleMessage(
             "Your body weight is higher than normal."),
         "history": MessageLookupByLibrary.simpleMessage("History"),
@@ -49,9 +51,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "normal": MessageLookupByLibrary.simpleMessage("Normal"),
         "normalWeight": MessageLookupByLibrary.simpleMessage(
             "You have a normal body weight."),
+        "on": MessageLookupByLibrary.simpleMessage("on"),
         "overweight": MessageLookupByLibrary.simpleMessage("Overweight"),
         "reCalculate": MessageLookupByLibrary.simpleMessage("RE-CALCULATE"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
         "underweight": MessageLookupByLibrary.simpleMessage("Underweight"),
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),

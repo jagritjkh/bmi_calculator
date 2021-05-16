@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/more_button.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/functions/database_helper.dart';
 import 'package:bmi_calculator/models/result.dart';
@@ -33,7 +34,6 @@ class _ResultsPageState extends State<ResultsPage> {
         automaticallyImplyLeading: false,
         titleSpacing: 20,
         title: Text(s.yourResult, style: theme.textTheme.headline4),
-        actions: [HistoryButton(false)],
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -118,7 +118,18 @@ class _ResultsPageState extends State<ResultsPage> {
                 style: theme.textTheme.bodyText2!.copyWith(fontSize: 16),
               ),
             ),
-            BottomBar(onTap: () => Navigator.pop(context), text: s.reCalculate),
+            Row(
+              children: [
+                Expanded(
+                  child: BottomBar(
+                      onTap: () => Navigator.pop(context), text: s.reCalculate),
+                ),
+                MoreButton(false),
+                SizedBox(
+                  width: 16,
+                )
+              ],
+            ),
           ],
         ),
       ),

@@ -41,7 +41,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             shape: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
                                 borderSide: BorderSide.none),
-                            backgroundColor: lightColor,
+                            backgroundColor: theme.scaffoldBackgroundColor,
                             title: Text(s.deleteHistory,
                                 style: theme.textTheme.bodyText1),
                             content: Text(s.areYouSure,

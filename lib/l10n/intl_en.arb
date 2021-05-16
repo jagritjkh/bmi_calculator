@@ -30,5 +30,8 @@
   "time": "Time",
   "goBack": "Go back",
   "noHistory": "No history!",
-  "calculateNow": "Calculate Now!"
+  "calculateNow": "Calculate Now!",
+  "heyIFound": "Hey, I found this great app to measure",
+  "on": "on",
+  "share": "Share"
 }

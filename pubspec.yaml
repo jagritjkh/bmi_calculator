@@ -17,6 +17,8 @@ dependencies:
   path: ^1.8.0
   lottie: ^1.0.1
   animation_wrappers: ^0.0.4
+  share: ^2.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -31,7 +33,7 @@ flutter:
 
 
 flutter_intl:
-  enabled: false
+  enabled: true
   class_name: S
   main_locale: en
 
