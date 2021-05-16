@@ -7,11 +7,13 @@ import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/functions/calculator_brain.dart';
 import 'package:bmi_calculator/local_data_layer/local_data_layer.dart';
+import 'package:bmi_calculator/local_data_layer/theme_cubit.dart';
 import 'package:bmi_calculator/models/result.dart';
 import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:bmi_calculator/theme/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/generated/l10n.dart';
 
@@ -65,7 +67,7 @@ class _InputPageState extends State<InputPage> {
                       setState(() {
                         isDark = !isDark;
                       });
-                      await LocalDataLayer().setTheme(isDark);
+                      BlocProvider.of<ThemeCubit>(context).setTheme(isDark);
                     },
                   );
                 }),

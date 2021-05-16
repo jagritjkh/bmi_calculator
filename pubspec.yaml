@@ -20,6 +20,7 @@ dependencies:
   share: ^2.0.1
   animated_theme_switcher: ^2.0.1
   shared_preferences: ^2.0.5
+  flutter_bloc: ^7.0.0
 
 
 dev_dependencies:

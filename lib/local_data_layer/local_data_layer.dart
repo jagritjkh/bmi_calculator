@@ -1,3 +1,6 @@
+import 'package:bmi_calculator/app_config/app_config.dart';
+import 'package:bmi_calculator/theme/style.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDataLayer {
@@ -13,6 +16,7 @@ class LocalDataLayer {
 
   SharedPreferences? _prefs;
   static const String isDark = 'isDark';
+  static const String locale = 'locale';
 
   _initPref() async {
     if (_prefs == null) {
@@ -25,8 +29,26 @@ class LocalDataLayer {
     return _prefs!.setBool(isDark, value);
   }
 
-  Future<bool?> getTheme() async {
+  Future<ThemeData> getTheme() async {
     await _initPref();
-    return _prefs!.containsKey(isDark) ? _prefs!.getBool(isDark) : false;
+    bool? isDarkTheme =
+        _prefs!.containsKey(isDark) ? _prefs!.getBool(isDark) : false;
+    if (isDarkTheme!) {
+      return AppTheme.darkTheme;
+    } else {
+      return AppTheme.lightTheme;
+    }
+  }
+
+  Future<String> getCurrentLanguage() async {
+    await _initPref();
+    return _prefs!.containsKey(locale)
+        ? _prefs!.getString(locale)!
+        : AppConfig.languageDefault;
+  }
+
+  Future<bool> setCurrentLanguage(String langCode) async {
+    await _initPref();
+    return _prefs!.setString(locale, langCode);
   }
 }

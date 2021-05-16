@@ -1,42 +1,57 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:bmi_calculator/generated/l10n.dart';
-import 'package:bmi_calculator/local_data_layer/local_data_layer.dart';
+import 'package:bmi_calculator/local_data_layer/language_cubit.dart';
+import 'package:bmi_calculator/local_data_layer/theme_cubit.dart';
 import 'package:bmi_calculator/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'screens/input_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  bool? isDark = await LocalDataLayer().getTheme();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(BMICalculator(isDark!));
+  runApp(BMICalculator());
 }
 
 class BMICalculator extends StatelessWidget {
-  final bool isDark;
-
-  BMICalculator(this.isDark);
-
   @override
   Widget build(BuildContext context) {
-    return ThemeProvider(
-      initTheme: isDark ? AppTheme.darkTheme : AppTheme.lightTheme,
-      builder: (context, myTheme) {
-        return MaterialApp(
-          theme: myTheme,
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          home: InputPage(isDark),
-        );
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()..getTheme()),
+        BlocProvider<LanguageCubit>(
+            create: (context) => LanguageCubit()..getCurrentLanguage()),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (context, theme) {
+          bool isDark = theme == AppTheme.lightTheme ? false : true;
+          return ThemeProvider(
+            initTheme: theme,
+            duration: Duration(milliseconds: 350),
+            builder: (context, myTheme) {
+              return BlocBuilder<LanguageCubit, Locale>(
+                builder: (context, locale) {
+                  return MaterialApp(
+                    theme: myTheme,
+                    locale: locale,
+                    localizationsDelegates: [
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: S.delegate.supportedLocales,
+                    home: InputPage(isDark),
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
