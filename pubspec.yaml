@@ -31,7 +31,7 @@ flutter:
 
 
 flutter_intl:
-  enabled: true
+  enabled: false
   class_name: S
   main_locale: en
 

@@ -22,6 +22,7 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var s = S.of(context);
     return widget.results.length != 0
         ? Scaffold(
             appBar: AppBar(
@@ -35,34 +36,39 @@ class _HistoryPageState extends State<HistoryPage> {
                   onPressed: () async {
                     await showDialog(
                         context: context,
-                        builder: (context) => AlertDialog(
-                              shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  borderSide: BorderSide.none),
-                              backgroundColor: lightColor,
-                              title: Text('Delete history'),
-                              content: Text(
-                                  'Are you sure? Do you want to delete history?'),
-                              actions: [
-                                BottomBar(
-                                  onTap: () => Navigator.pop(context),
-                                  text: 'No',
-                                  width: 100,
-                                ),
-                                BottomBar(
-                                  onTap: () async {
-                                    Database db = await widget.database!;
-                                    db.delete('result');
-                                    setState(() {
-                                      widget.results.clear();
-                                    });
-                                    Navigator.pop(context);
-                                  },
-                                  text: 'Yes',
-                                  width: 100,
-                                ),
-                              ],
-                            ));
+                        builder: (context) {
+                          return AlertDialog(
+                            shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none),
+                            backgroundColor: lightColor,
+                            title: Text(s.deleteHistory,
+                                style: theme.textTheme.bodyText1),
+                            content: Text(s.areYouSure,
+                                style: theme.textTheme.bodyText2),
+                            actionsPadding:
+                                EdgeInsets.symmetric(horizontal: 16),
+                            actions: [
+                              BottomBar(
+                                onTap: () => Navigator.pop(context),
+                                text: s.no,
+                                width: 100,
+                              ),
+                              BottomBar(
+                                onTap: () async {
+                                  Database db = await widget.database!;
+                                  db.delete('result');
+                                  setState(() {
+                                    widget.results.clear();
+                                  });
+                                  Navigator.pop(context);
+                                },
+                                text: s.yes,
+                                width: 100,
+                              ),
+                            ],
+                          );
+                        });
                   },
                 )
               ],
@@ -81,32 +87,36 @@ class _HistoryPageState extends State<HistoryPage> {
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 12.0),
                                 title: Text(
-                                  'Date : ' +
+                                  '${s.date} : ' +
                                       widget.results[index].date!
                                           .substring(0, 10),
+                                  style: theme.textTheme.bodyText1,
                                 ),
                                 subtitle: Text(
-                                  'Time : ' +
+                                  '${s.time} : ' +
                                       widget.results[index].date!
                                           .substring(11, 16),
+                                  style: theme.textTheme.bodyText2!
+                                      .copyWith(fontSize: 16),
                                 ),
                                 trailing: Text(
                                   widget.results[index].result!,
-                                  // style: kLabelTextStyle.copyWith(
-                                  //     color: widget.results[index].result ==
-                                  //             'Normal'
-                                  //         ? Colors.green.shade500
-                                  //         : Colors.red,
-                                  //     fontSize: 20,
-                                  //     fontWeight: FontWeight.bold),
+                                  style: theme.textTheme.bodyText1!.copyWith(
+                                    color:
+                                        widget.results[index].result == s.normal
+                                            ? Colors.green
+                                            : Colors.red,
+                                  ),
                                 ),
                               ),
-                              buildRow('BMI', 'BMR', 'IBW', TextStyle()),
+                              buildRow('BMI', 'BMR', 'IBW',
+                                  theme.textTheme.bodyText1!),
                               buildRow(
                                   widget.results[index].bmi!,
                                   widget.results[index].bmr!,
                                   widget.results[index].ibw!,
-                                  TextStyle(fontSize: 28)),
+                                  theme.textTheme.headline5!
+                                      .copyWith(fontWeight: FontWeight.normal)),
                             ],
                           ),
                         )),
@@ -135,7 +145,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: BottomBar(
-                    text: 'Go back',
+                    text: s.goBack,
                     onTap: () => Navigator.pop(context),
                   ),
                 )
@@ -149,7 +159,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   Lottie.asset('assets/no_history.json',
                       width: MediaQuery.of(context).size.width / 2),
                   SizedBox(height: 20.0),
-                  Text('No history!'),
+                  Text(s.noHistory),
                   Spacer(flex: 4),
                   BottomBar(
                     onTap: () {
@@ -158,7 +168,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       }
                       Navigator.pop(context);
                     },
-                    text: 'Calculate Now',
+                    text: s.calculateNow,
                   ),
                 ],
               ),

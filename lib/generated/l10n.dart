@@ -279,6 +279,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Delete history`
+  String get deleteHistory {
+    return Intl.message(
+      'Delete history',
+      name: 'deleteHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure? Do you want to delete history?`
+  String get areYouSure {
+    return Intl.message(
+      'Are you sure? Do you want to delete history?',
+      name: 'areYouSure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message(
+      'Time',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go back`
+  String get goBack {
+    return Intl.message(
+      'Go back',
+      name: 'goBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No history!`
+  String get noHistory {
+    return Intl.message(
+      'No history!',
+      name: 'noHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calculate Now!`
+  String get calculateNow {
+    return Intl.message(
+      'Calculate Now!',
+      name: 'calculateNow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -22,11 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "age": MessageLookupByLibrary.simpleMessage("Age"),
+        "areYouSure": MessageLookupByLibrary.simpleMessage(
+            "Are you sure? Do you want to delete history?"),
         "between18And25":
             MessageLookupByLibrary.simpleMessage("between 18 and 25"),
         "calculate": MessageLookupByLibrary.simpleMessage("Calculate"),
+        "calculateNow": MessageLookupByLibrary.simpleMessage("Calculate Now!"),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "deleteHistory": MessageLookupByLibrary.simpleMessage("Delete history"),
         "exerciseMore": MessageLookupByLibrary.simpleMessage("Exercise more!"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "greatGoing": MessageLookupByLibrary.simpleMessage("Great going!"),
         "height": MessageLookupByLibrary.simpleMessage("Height"),
         "higherWeight": MessageLookupByLibrary.simpleMessage(
@@ -38,14 +44,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreFood":
             MessageLookupByLibrary.simpleMessage("Have some more food!"),
         "moreThan25": MessageLookupByLibrary.simpleMessage("more than 25"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
+        "noHistory": MessageLookupByLibrary.simpleMessage("No history!"),
         "normal": MessageLookupByLibrary.simpleMessage("Normal"),
         "normalWeight": MessageLookupByLibrary.simpleMessage(
             "You have a normal body weight."),
         "overweight": MessageLookupByLibrary.simpleMessage("Overweight"),
         "reCalculate": MessageLookupByLibrary.simpleMessage("RE-CALCULATE"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
+        "time": MessageLookupByLibrary.simpleMessage("Time"),
         "underweight": MessageLookupByLibrary.simpleMessage("Underweight"),
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "youAreUnderweight":
             MessageLookupByLibrary.simpleMessage("You are underweight."),
         "yourResult": MessageLookupByLibrary.simpleMessage("Your Result")

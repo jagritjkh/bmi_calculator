@@ -21,5 +21,14 @@
   "between18And25": "between 18 and 25",
   "moreThan25": "more than 25",
   "reCalculate": "RE-CALCULATE",
-  "history": "History"
+  "history": "History",
+  "deleteHistory": "Delete history",
+  "areYouSure": "Are you sure? Do you want to delete history?",
+  "no": "No",
+  "yes": "Yes",
+  "date": "Date",
+  "time": "Time",
+  "goBack": "Go back",
+  "noHistory": "No history!",
+  "calculateNow": "Calculate Now!"
 }
